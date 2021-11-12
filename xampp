@@ -1,11 +1,6 @@
 #!/bin/bash
 [ "$EUID" != 0 ] && echo "Please run as root!" && exit;
 
-#start
-#selection
-#selection2
-#execute
-
 XAMPP="/opt/lampp/xampp";
 
 echo "Hi, select if you want to start or stop the xampp services";
