@@ -1,0 +1,49 @@
+#!/bin/bash
+[ "$EUID" != 0 ] && echo "Please run as root!" && exit;
+
+#start
+#selection
+#selection2
+#execute
+
+XAMPP="/opt/lampp/xampp";
+
+echo "Hi, select if you want to start or stop the xampp services";
+echo "1 - Start";
+echo "2 - Stop";
+echo "3 - Do the Default (Start Apache and MySql)";
+read -p "" start;
+sleep 0.5;
+
+[ "$start" = "1" ] && echo "Alright! Let's start them. Do you want to:";
+[ "$start" = "1" ] && echo "1 - Start them all!";
+[ "$start" = "1" ] && echo "2 - Start only Apache and MySql";
+[ "$start" = "1" ] && echo "3 - Start only Apache";
+[ "$start" = "1" ] && echo "4 - Start only MySql";
+[ "$start" = "1" ] && echo "5 - Start only ProFTPD";
+[ "$start" = "1" ] && execute="$XAMPP start";
+
+[ "$start" = "2" ] && echo "Okay! So, let's stop them!";
+[ "$start" = "2" ] && echo "1 - Stop them all!";
+[ "$start" = "2" ] && echo "2 - Stop only Apache and MySql";
+[ "$start" = "2" ] && echo "3 - Stop only Apache";
+[ "$start" = "2" ] && echo "4 - Stop only MySql";
+[ "$start" = "2" ] && echo "5 - Stop only ProFTPD";
+[ "$start" = "2" ] && execute="$XAMPP stop";
+
+[ "$start" = "3" ] && sudo ${XAMPP} startapache && sudo ${XAMPP} startmysql && exit;
+
+read -p "" selection
+
+[ "$selection" = "1" ] && selection="";
+[ "$selection" = "2" ] && selection="apache" && selection2="mysql";
+[ "$selection" = "3" ] && selection="apache";
+[ "$selection" = "4" ] && selection="mysql";
+[ "$selection" = "5" ] && selection="ftp"
+
+sleep 0.5;
+[ -z "$selection2" ] || sudo $execute$selection2;
+
+execute=$execute$selection;
+sudo $execute;
+
