@@ -1,9 +1,13 @@
 #!/bin/bash
 [ "$1" == "open" ] && [ "$EUID" == "0" ] && echo "Please, run as non-root!" && exit;
-[ -z "$1" ] || ([ "$1" == "open" ] && [ "$EUID" != 0 ] && xdg-open /opt/lampp/htdocs && exit) || exit;
+
+[ "$1" == "open" ] && [ "$EUID" != 0 ] && xdg-open /opt/lampp/htdocs && exit;
 [ "$EUID" != 0 ] && echo "Please run as root! If you want to open the htdocs directory, just put the argument 'open' after xampp" && exit;
 
 XAMPP="/opt/lampp/xampp";
+
+[ "$1" == "start" ] && echo "alright" && $XAMPP start && exit;
+[ "$1" == "stop" ] && $XAMPP stop && exit;
 
 echo "Hi, select if you want to start or stop the xampp services";
 echo "1 - Start";
