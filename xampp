@@ -1,5 +1,12 @@
 #!/bin/bash
-[ "$EUID" != 0 ] && echo "Please run as root!" && exit;
+[ "$1" == "open" ] && [ "$EUID" == "0" ] && echo "Please, run as non-root!" && exit;
+[ -z "$1" ] || ([ "$1" == "open" ] && [ "$EUID" != 0 ] && xdg-open /opt/lampp/htdocs && exit) || exit;
+[ "$EUID" != 0 ] && echo "Please run as root! If you want to open the htdocs directory, just put the argument 'open' after xampp" && exit;
+
+#start
+#selection
+#selection2
+#execute
 
 XAMPP="/opt/lampp/xampp";
 
